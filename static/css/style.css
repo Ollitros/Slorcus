@@ -1,0 +1,33 @@
+.navigation {
+    background-color: #333;
+}
+.navigation div {
+    text-align: center;
+    font-size: 18px;
+}
+.navigation a {
+    text-decoration: none;
+    color: whitesmoke;
+    background-color: #333;
+    line-height: 35px;
+    padding-top: 7px;
+    padding-bottom: 11px;
+}
+.navigation a:hover{
+    color: #ff9861;
+}
+.navigation .col-md-2 {
+    padding: 0px;
+    height: 38px;
+}
+.navigation .row {
+    height: 38px;
+}
+.footer {
+    background-color: #333;
+    color: whitesmoke;
+}
+.footer p{
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
