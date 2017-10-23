@@ -35,3 +35,32 @@
 .logo {
     font-size: 30px;
 }
+.about_book {
+    text-align: center;
+    font-family: Consolas;
+}
+.about_book img{
+    height: 60%;
+    width: 60%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.about_book #short_description {
+    text-align: left;
+    font-size: 16px;
+}
+.about_book #description {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+.about_book #bye_button {
+    font-size: 22px;
+    height: 60px;
+    width: 130px;
+}
+.about_book #add_to_cart_button {
+    font-size: 12px;
+    height: 30px;
+    width: 120px;
+}

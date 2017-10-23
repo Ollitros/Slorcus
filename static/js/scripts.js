@@ -1,12 +1,11 @@
 // $(document).ready(function(){
-//     $("#books").on("click",function () {
+//     $("#books").on("click", function () {
 //         var id = (this).data("data-id");
 //         books(id);
 //     });
 //
 //     function books(id) {
-//         var form = $('#form-books');
-//         var url = form.attr("action");
+//         var url = "library/";
 //         var my_data = id;
 //
 //         $.ajax({

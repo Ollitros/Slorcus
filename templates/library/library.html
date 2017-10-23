@@ -13,14 +13,16 @@
         </tr>
     </thead>
     <tbody>
-{#    <form id = "form-books" action="{% url 'books' %}">#}
         {% for book in books %}
-               <tr id="books" data-id = {{ book.id }}>
+               <tr>
                <td>{{ book.id }}</td> <td>{{ book.name }}</td> <td>{{ book.author }}</td> <td>{{ book.genre }}</td> <td>{{ book.price }}</td>
+                   <td>
+                       <form action="{% url "about_book" book.id %}">
+                           <button type="submit">OK</button>
+                       </form>
+                   </td>
            </tr>
        {% endfor %}
-{#    </form># }
-
     <tbody>
     <tfoot>
         <tr>
@@ -30,4 +32,4 @@
             </table>
         </div>
     </div>
-{% endblock %}
+{% endblock  %}

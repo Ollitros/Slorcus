@@ -37,3 +37,15 @@ class Book(models.Model):
     class Meta:
         verbose_name_plural = "Books"
         verbose_name = "Book"
+
+
+class BookPicture(models.Model):
+    product = models.ForeignKey(Book, blank=True, null=True, default=None)
+    image = models.ImageField(upload_to='book_images/')
+
+    def __str__(self):
+        return "%s" % self.id
+
+    class Meta:
+        verbose_name_plural = "Images"
+        verbose_name = "Image"

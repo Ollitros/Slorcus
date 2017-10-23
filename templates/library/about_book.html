@@ -1,0 +1,52 @@
+{% extends 'BASE.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container about_book">
+        <div class="row">
+            <div class="col-md-12 ">
+                <h2>
+                   <p>{{ book.author }} , "{{ book.name}}"</p>
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-md-12" style="text-align: left;">
+                    <img src="{{ book_image.image.url }}" alt="{{ book.name }}">
+                    <div style="float: right">
+                        <form >
+                            <button type="submit" class="btn btn-success" id="bye_button"> BYE </button>
+                            <button type="submit" class="btn btn-primary" id="add_to_cart_button"> ADD TO CART</button>
+                        </form>
+                    </div>
+                </div>
+        </div>
+        <div class="row" id="short_description">
+            <div class="col-md-6">
+                <p>
+                    Name: {{ book.name }}
+                </p>
+                <p>
+                    Genre: {{ book.genre }}
+                </p>
+                <p>
+                    Author: {{ book.author }}
+                </p>
+            </div>
+        </div>
+        <div class="row" id="description">
+            <div class="col-md-12">
+                <p>Description</p>
+            </div>
+            <div class="col-md-12">
+                {{ book.description }}
+            </div>
+        </div>
+                 Information of 2017 years
+
+    </div>
+
+
+
+{% endblock %}
