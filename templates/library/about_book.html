@@ -15,9 +15,14 @@
                 <div class="col-md-12" style="text-align: left;">
                     <img src="{{ book_image.image.url }}" alt="{{ book.name }}">
                     <div style="float: right">
-                        <form >
+                        <form class = "bye_form" action="">
+                            <label>${{ book.price }}</label>
+{#                            <input min="1" id = "bye" placeholder="Enter quantity" type="number" class="form-control">#}
                             <button type="submit" class="btn btn-success" id="bye_button"> BYE </button>
-                            <button type="submit" class="btn btn-primary" id="add_to_cart_button"> ADD TO CART</button>
+{#                            <button type="submit" class="btn btn-primary" id="add_to_cart_button"> ADD TO CART</button>#}
+                        </form>
+                        <form id="form_buying_product" action="{% url 'basket_adding' %}">{% csrf_token %}
+                            <button type="submit" class="btn btn-primary" id="add_to_cart_button"  data-book_id = "{{ book.id }}"> ADD TO CART</button>
                         </form>
                     </div>
                 </div>
@@ -37,7 +42,7 @@
         </div>
         <div class="row" id="description">
             <div class="col-md-12">
-                <p>Description</p>
+                <p id="tap">Description</p>
             </div>
             <div class="col-md-12">
                 {{ book.description }}

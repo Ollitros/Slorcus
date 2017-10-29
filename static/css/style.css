@@ -32,8 +32,9 @@
     padding-top: 15px;
     padding-bottom: 10px;
 }
-.logo {
-    font-size: 30px;
+.logo img{
+    height: 95%;
+    width: 80%;
 }
 .about_book {
     text-align: center;
@@ -55,12 +56,29 @@
     margin-bottom: 25px;
 }
 .about_book #bye_button {
+    display: block;
     font-size: 22px;
     height: 60px;
-    width: 130px;
+    width: 150px;
+    margin: 15px 5px 5px 15px;
 }
 .about_book #add_to_cart_button {
     font-size: 12px;
+    display: block;
     height: 30px;
-    width: 120px;
+    width: 100px;
+    margin: 20px 10px 10px 40px;
+}
+.bye_form {
+    margin-top: 80px;
+    width: 220px;
+    padding: 20px;
+    text-align: center;
+    display: block;
+}
+.bye_form Label {
+    font-size: 48px;
+}
+#basket {
+    color: whitesmoke;
 }
