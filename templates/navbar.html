@@ -17,8 +17,12 @@
            <a href="#">...</a>
        </div>
     <div class="col-md-2" id="basket">
+    <p>
         {% for product_in_basket in products_in_basket %}
                 {{ product_in_basket.book_id }}
+            {{ product_in_basket.books.name }}
         {% endfor %}
+    </p>
+
     </div>
 </div>

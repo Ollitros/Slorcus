@@ -1,0 +1,15 @@
+{% extends 'BASE.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+
+        {% for product in products %}
+            {{ product.book_id }}
+            {{ product.books.name }}
+        {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}

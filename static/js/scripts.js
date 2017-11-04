@@ -17,7 +17,10 @@ $(document).ready(function(){
              cache: true,
              success: function(data){
                  console.log(data["book_id"] + data["session_key"]);
-                        // $('#basket').append("<p>" +data["book_id"] + data["session_key"] + "</p>");
+                 $('#basket').html("");
+                     $.each(data.products, function(k, v){
+                        $('#basket').append("<p>" + v.book_id + v.name + "</p>");
+                     });
             }
          });
 
@@ -33,9 +36,6 @@ $(document).ready(function(){
         basketUpdating(book_id)
     });
 
-    $("#tap").on('click', function (e) {
-        alert("Hello");
-    })
 
     // $(document).on('click', '.delete-item', function(e){
     //      e.preventDefault();

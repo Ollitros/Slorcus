@@ -15,7 +15,7 @@
                 <div class="col-md-12" style="text-align: left;">
                     <img src="{{ book_image.image.url }}" alt="{{ book.name }}">
                     <div style="float: right">
-                        <form class = "bye_form" action="">
+                        <form class = "bye_form" action="{% url 'ordering' book.id %}" method="post">{% csrf_token %}
                             <label>${{ book.price }}</label>
 {#                            <input min="1" id = "bye" placeholder="Enter quantity" type="number" class="form-control">#}
                             <button type="submit" class="btn btn-success" id="bye_button"> BYE </button>
