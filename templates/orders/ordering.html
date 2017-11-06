@@ -4,12 +4,67 @@
 {% block content %}
     <div class="container">
         <div class="row">
-
         {% for product in products %}
-            {{ product.book_id }}
-            {{ product.books.name }}
+           <div class="col-md-6">
+               <div class="product_in_ordering">
+                   <form action="" method="post">
+                       <div class=" hidden form-error col-md-3">{{ form_p.nmb.errors }}</div>
+                       <label for="quantity">{{ product.books.name }}</label>
+                       <input id="quantity" type="text" name="{{ form_p.nmb.html_name }}"/>
+                   </form>
+               </div>
+            </div>
         {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form id="order-form" class="form-horizontal" role="form" action="{% url 'ordering' 1 %}" method="post">{% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class=" hidden form-error col-md-3">{{ form.name.errors }}</div>
+                            <label class="col-md-2 control-label" for="Name">Name</label>
+                            <div class="col-md-6">
+                                <input class="form-control" id="Name" type="text"  name="{{ form.name.html_name }}" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class=" hidden form-error col-md-3">{{ form.surname.errors }}</div>
+                            <label class="col-md-2 control-label" for="Surname">Surname</label>
+                            <div class="col-md-6">
+                                <input class="form-control" id="Surname" type="text" name="{{ form.surname.html_name }}" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class=" hidden form-error col-md-3">{{ form.email.errors }}</div>
+                            <label class="col-md-2 control-label" for="Email">Email</label>
+                            <div class="col-md-6">
+                                <input class="form-control" id="Email" type="email" name="{{ form.email.html_name }}" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class=" hidden form-error col-md-3">{{ form.mobile_number.errors }}</div>
+                            <label class="col-md-2 control-label" for="Mobile number">Mobile number</label>
+                            <div class="col-md-6">
+                                <input class="form-control" id="Mobile number" type="text" name="{{ form.mobile_number.html_name }}" />
+                             </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class=" hidden form-error col-md-3"> {{ form.appendage.errors }}</div>
+                            <label class="col-md-2 control-label" for="Comments">Comments</label>
+                            <textarea class="form-control" rows="3" id="Comments" name="{{ form.appendage.html_name }}" ></textarea>
+                        </div>
+                        <div class="col-md-12">
+                             <div class=" hidden form-error col-md-3">{{ form.address.errors }}</div>
+                             <label class="col-md-2 control-label" for="Address">Address</label>
+                             <textarea  class="form-control" rows="3" id="Address"  name="{{ form.address.html_name }}" placeholder="Address"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-success bye-order-button">BYE</button>
+                        </div>
 
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

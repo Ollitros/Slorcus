@@ -82,3 +82,19 @@
 #basket {
     color: whitesmoke;
 }
+.product_in_ordering {
+    margin: 10px;
+}
+.form-error{
+    color: red;
+}
+#order-form div{
+    margin: 3px;
+    font-size: 16px;
+}
+.bye-order-button {
+    font-size: 28px;
+    margin-left: 40%;
+    width: 150px;
+    height: 80px;
+}

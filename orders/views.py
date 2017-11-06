@@ -2,6 +2,7 @@ from django.shortcuts import render
 from Library.models import *
 from orders.models import *
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
+from orders.forms import *
 
 
 def basket_adding(request):
@@ -60,5 +61,30 @@ def ordering(request, book_id):
         book_object.orderinbasket_set.add(c)
 
     products = OrderInBasket.objects.filter(session_key=session_key)
+
+    """FORMS FOR ORDERING"""
+
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = OrderForm(request.POST)
+        form_p = ProductsForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            surname = form.cleaned_data['surname']
+            email = form.cleaned_data['email']
+            appendage = form.cleaned_data['appendage']
+            mobile_number = form.cleaned_data['mobile_number']
+            address = form.cleaned_data['address']
+
+            order = Order(address=address, email=email, mobile_number=mobile_number, appendage=appendage,
+                          name=name, surname=surname)
+            order.save()
+
+            return HttpResponse("OK")
+
+            # if a GET (or any other method) we'll create a blank form
+    else:
+        form = OrderForm()
 
     return render(request, 'orders/ordering.html', locals())

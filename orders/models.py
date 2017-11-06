@@ -3,7 +3,7 @@ from Library.models import *
 
 
 class Order(models.Model):
-    product = models.ForeignKey(Book)
+    address = models.CharField(max_length=256, null=True)
     email = models.EmailField(blank=False, max_length=64)
     name = models.CharField(max_length=64)
     surname = models.CharField(max_length=64)
@@ -20,11 +20,34 @@ class Order(models.Model):
         verbose_name_plural = 'Orders'
 
 
+class ProductInOrder(models.Model):
+    order = models.ForeignKey(Order, blank=True, null=True, default=None)
+    product = models.ForeignKey(Book, blank=True, null=True, default=None)
+    quantity = models.IntegerField(default=1)
+    price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    def __str__(self):
+        return "%s" % self.product.name
+
+    class Meta:
+        verbose_name = 'Book in order'
+        verbose_name_plural = 'Books in order'
+
+    def save(self, *args, **kwargs):
+        price_per_item = self.product.price
+        self.price_per_item = price_per_item
+        print (self.quantity)
+
+        self.total_price = int(self.quantity) * price_per_item
+
+        super(ProductInOrder, self).save(*args, **kwargs)
+
+
 class OrderInBasket(models.Model):
     books = models.ForeignKey(Book, blank=True, null=True, default=None)
     session_key = models.CharField(max_length=1024)
     book_id = models.CharField(max_length=1024, blank=True, null=True, default=None)
-
 
     def __str__(self):
         return "OrderInBasket %s" % self.session_key
