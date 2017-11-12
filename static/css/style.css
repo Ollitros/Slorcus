@@ -98,3 +98,11 @@
     width: 150px;
     height: 80px;
 }
+.correct{
+    text-align: right;
+    color: green;
+}
+#product_in_basket_form
+{
+
+}

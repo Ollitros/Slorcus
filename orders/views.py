@@ -46,6 +46,53 @@ def basket_adding(request):
     return JsonResponse(return_dict)
 
 
+def product_in_order(request):
+    session_key = request.session.session_key
+    print("PRODUCT IN ORDER:")
+    # print(request.POST)
+
+    data = request.POST
+    book_id = data.get("book_id")
+    book_quantity = data.get("quantity")
+
+    print("book_id = ", book_id)
+    print("quantity = ", book_quantity)
+
+    preliminary_test_product = ProductInOrder.objects.filter(session_key_product_in_order=session_key, product__id=book_id)
+
+    for item in preliminary_test_product:
+        print("preliminary_test_product: ", item.quantity)
+        print("preliminary_test_product: ", item.product.id)
+
+    if not preliminary_test_product:
+        print("PRODUCT IN ORDER IS FALSE(does not exist)")
+        book = Book.objects.get(id=book_id)
+        book_in_order = ProductInOrder(session_key_product_in_order=session_key, quantity=book_quantity)
+        book_in_order.product = book
+        book_in_order.price_per_item = book.price
+        book_in_order.save()
+    else:
+        print("PRODUCT IN ORDER IS TRUE(EXISTS)")
+        book_in_order = ProductInOrder.objects.get(session_key_product_in_order=session_key, product__id=book_id)
+        book_in_order.quantity = book_quantity
+        book_in_order.save()
+
+    book_in_order = ProductInOrder.objects.get(session_key_product_in_order=session_key, product__id=book_id)
+
+    product_in_order_id = book_in_order.product.id
+    amount = book_in_order.quantity
+    price_per_item = book_in_order.price_per_item
+    total_price = book_in_order.total_price
+
+    return_dict = dict()
+    return_dict["id"] = product_in_order_id
+    return_dict["amount"] = amount
+    return_dict["price_per_item"] = price_per_item
+    return_dict["total_price"] = total_price
+
+    return JsonResponse(return_dict)
+
+
 def ordering(request, book_id):
     print(book_id)
     session_key = request.session.session_key
@@ -61,6 +108,7 @@ def ordering(request, book_id):
         book_object.orderinbasket_set.add(c)
 
     products = OrderInBasket.objects.filter(session_key=session_key)
+    products_in_order = ProductInOrder.objects.filter(session_key_product_in_order=session_key)
 
     """FORMS FOR ORDERING"""
 
@@ -68,6 +116,7 @@ def ordering(request, book_id):
         # create a form instance and populate it with data from the request:
         form = OrderForm(request.POST)
         form_p = ProductsForm(request.POST)
+
         # check whether it's valid:
         if form.is_valid():
             name = form.cleaned_data['name']

@@ -28,7 +28,7 @@ class Book(models.Model):
     name = models.CharField(max_length=48)
     author = models.ForeignKey(Author, blank=True, null=True, default=None)
     genre = models.ForeignKey(Genre, blank=True, null=True, default=None)
-    price = models.CharField(max_length=32)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     description = models.TextField(max_length=4096)
 
     def __str__(self):

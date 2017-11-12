@@ -21,6 +21,7 @@ class Order(models.Model):
 
 
 class ProductInOrder(models.Model):
+    session_key_product_in_order = models.CharField(max_length=1024, null=True)
     order = models.ForeignKey(Order, blank=True, null=True, default=None)
     product = models.ForeignKey(Book, blank=True, null=True, default=None)
     quantity = models.IntegerField(default=1)

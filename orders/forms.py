@@ -2,6 +2,7 @@ from django import forms
 
 
 class OrderForm(forms.Form):
+    required_css_class = 'error'
     email = forms.EmailField(required=True, max_length=64)
     name = forms.CharField(required=True, max_length=64)
     surname = forms.CharField(required=True, max_length=64)
