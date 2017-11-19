@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from Library.models import *
 from orders.models import *
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from orders.forms import *
+import random
 
 
 def basket_adding(request):
@@ -110,6 +112,9 @@ def ordering(request, book_id):
     products = OrderInBasket.objects.filter(session_key=session_key)
     products_in_order = ProductInOrder.objects.filter(session_key_product_in_order=session_key)
 
+
+
+
     """FORMS FOR ORDERING"""
 
     if request.method == 'POST':
@@ -127,13 +132,45 @@ def ordering(request, book_id):
             address = form.cleaned_data['address']
 
             order = Order(address=address, email=email, mobile_number=mobile_number, appendage=appendage,
-                          name=name, surname=surname)
+                          name=name, surname=surname, session_key_in_order=session_key)
             order.save()
+            prod_in_order = ProductInOrder.objects.filter(session_key_product_in_order=session_key)
+            order = Order.objects.get(session_key_in_order=session_key)
 
-            return HttpResponse("OK")
+            for item in prod_in_order:
+                item.order = order
+                total_price_prod = item.total_price
+                total_price_order = order.total_price
+                total_price_order = total_price_order + total_price_prod
+                order.total_price = total_price_order
+
+                item.save()
+                order.save()
+
+            # prod_in_order.order = order
+            # total_price_prod = prod_in_order.total_price
+            # total_price_order = order.total_price
+            # total_price_order = total_price_order + total_price_prod
+            # order.total_price = total_price_order
+
+            return redirect('/done_ordering/')
 
             # if a GET (or any other method) we'll create a blank form
     else:
         form = OrderForm()
 
+    if products_in_order:
+        for prod in products:
+            for prorder in products_in_order:
+                if int(prod.book_id) == prorder.product.id:
+                    return redirect('/check_on_exist/')
+
     return render(request, 'orders/ordering.html', locals())
+
+
+def done_ordering(request):
+    return render(request, 'orders/done_ordering.html', locals())
+
+
+def check_on_exist(request):
+    return render(request, 'orders/check_on_exist.html', locals())

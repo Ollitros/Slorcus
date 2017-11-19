@@ -52,11 +52,11 @@ $(document).ready(function() {
             data: data,
             cache: true,
             success: function (data) {
-                console.log(data.amount);
-                $('#price_per_item_label').html("");
-                $('#total_price_label').html("");
-                $("#price_per_item_label").append( "Price: $" , data.price_per_item);
-                $("#total_price_label").append("Total price: $" , data.total_price);
+                var book_id = data.id;
+                $('#price_per_item_label'+ book_id).html("");
+                $('#total_price_label'+ book_id).html("");
+                $("#price_per_item_label"+book_id).append( "Price: $" , data.price_per_item);
+                $("#total_price_label"+book_id).append("Total price: $" , data.total_price);
             }
         });
 
@@ -64,13 +64,26 @@ $(document).ready(function() {
 
      $('#product_in_basket_form').on('change', function (e){
          e.preventDefault();
-         // var product_in_ordering_form = $('product_in_basket_form');
-         var input_quantity = $("#quantity");
-         var quantity = input_quantity.val();
-         var book_id = input_quantity.data("book_id");
-         console.log(quantity);
-         console.log(book_id);
-         product_in_order(book_id, quantity);
+         // var input_quantity = $(".input_quantity");
+         // var quantity = input_quantity.val();
+         // var book_id = input_quantity.data("book_id");
+
+         var input_quantity = $(".input_quantity");
+
+         var quantity = new Array();
+         for (var p=0; p<input_quantity.length; p++) {
+
+             quantity[p] = input_quantity.eq(p).val();
+         }
+
+         var book_id = new Array();
+          for (var p=0; p<input_quantity.length; p++) {
+             book_id[p] = input_quantity.eq(p).data("book_id");
+         }
+
+          for (var p=0; p<input_quantity.length; p++) {
+              product_in_order(book_id[p], quantity[p]);
+          }
 
      });
 

@@ -17,9 +17,7 @@
                     <div style="float: right">
                         <form class = "bye_form" action="{% url 'ordering' book.id %}" method="post">{% csrf_token %}
                             <label>${{ book.price }}</label>
-{#                            <input min="1" id = "bye" placeholder="Enter quantity" type="number" class="form-control">#}
                             <button type="submit" class="btn btn-success" id="bye_button"> BYE </button>
-{#                            <button type="submit" class="btn btn-primary" id="add_to_cart_button"> ADD TO CART</button>#}
                         </form>
                         <form id="form_buying_product" action="{% url 'basket_adding' %}">{% csrf_token %}
                             <button type="submit" class="btn btn-primary" id="add_to_cart_button"  data-book_id = "{{ book.id }}"> ADD TO CART</button>

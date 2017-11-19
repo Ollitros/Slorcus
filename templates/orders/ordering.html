@@ -10,11 +10,12 @@
                        {% for product in products %}
                            <div class=" hidden form-error col-md-3">{{ form_p.nmb.errors }}</div>
                            <label for="quantity">{{ product.books.name }}</label>
-                           <input id="quantity" type="text" name="{{ form_p.nmb.html_name }}"
-                                                    data-book_id = "{{ product.books.id }}" />
-                           <p id="price_per_item_label">Price $0</p>
-                           <p id="total_price_label">Total price $0</p>
+                           <input id="quantity" class="input_quantity" type="text" name="{{ form_p.nmb.html_name }}"
+                                                   data-book_id = "{{ product.books.id }}" />
+                           <p id="price_per_item_label{{ product.books.id }}" >Price $0</p>
+                           <p id="total_price_label{{ product.books.id }}"  >Total price $0</p>
                        {% endfor %}
+                   </div>
                    </form>
                </div>
             </div>

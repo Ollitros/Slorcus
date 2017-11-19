@@ -7,10 +7,11 @@ class Order(models.Model):
     email = models.EmailField(blank=False, max_length=64)
     name = models.CharField(max_length=64)
     surname = models.CharField(max_length=64)
-    quantity = models.CharField(blank=False, max_length=4096)
     mobile_number = models.EmailField(blank=False, max_length=32)
     appendage = models.TextField(max_length=2048, blank=True)
-    total_price = models.CharField(blank=False, max_length=256)
+    session_key_in_order = models.CharField(max_length=1024, null=True)
+    number_of_order = models.CharField(max_length=4096, null=True)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
         return "Order %s" % self.id
