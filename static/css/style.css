@@ -1,3 +1,7 @@
+
+.navigation .container{
+    height: 38px;
+}
 .navigation {
     background-color: #333;
     margin-bottom: 10px;
@@ -82,6 +86,22 @@
 #basket {
     color: whitesmoke;
 }
+.basket-inside{
+    position: relative;
+    width: 250px;
+    height: auto;
+    margin-left: auto ;
+    padding-left: 5px;
+    background-color: cornflowerblue;
+    z-index: 999999;
+}
+.basket-inside ul{
+    padding-left: 10px;
+    width: auto;
+    text-align: left;
+    list-style-type: none;
+}
+
 .product_in_ordering {
     margin: 10px;
 }
@@ -101,8 +121,4 @@
 .correct{
     text-align: right;
     color: green;
-}
-#product_in_basket_form
-{
-
 }

@@ -3,9 +3,11 @@
 
 
 {% block content %}
-    <h2 style="text-align: center; margin: 0px; margin-bottom: 5px;">List of ours books</h2>
+
     <div class="row">
+
         <div class="col-md-8 col-md-offset-2">
+        <h2 class="col-md-7 col-md-offset-3">List of ours books</h2>
             <table class="table table-striped">
                 <thead>
         <tr>
@@ -17,7 +19,7 @@
                <tr>
                <td>{{ book.id }}</td> <td>{{ book.name }}</td> <td>{{ book.author }}</td> <td>{{ book.genre }}</td> <td>{{ book.price }}</td>
                    <td>
-                       <form action="{% url "about_book" book.id %}">
+                       <form action="{% url "about_book" book.id %}">{% csrf_token %}
                            <button class="btn btn-primary" type="submit">More</button>
                        </form>
                    </td>

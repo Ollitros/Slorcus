@@ -11,18 +11,19 @@
            <a href="{% url 'library' %}">Library</a>
        </div>
        <div class="col-md-2">
-           <a href="#">...</a>
+           <a href="{% url 'about' %}">About</a>
        </div>
        <div class="col-md-2">
            <a href="#">...</a>
        </div>
     <div class="col-md-2" id="basket">
-    <p>
-        {% for product_in_basket in products_in_basket %}
-                {{ product_in_basket.book_id }}
-            {{ product_in_basket.books.name }}
-        {% endfor %}
-    </p>
-
+        <a href="" id="CART" >CART</a>
     </div>
+</div>
+<div class="basket-inside hidden" id="basket-inside">
+    <ul>
+        {% for product_in_basket in products_in_basket %}
+            <li id="basket-li">{{ product_in_basket.books.name }} -  ${{ product_in_basket.books.price }}</li>
+        {% endfor %}
+    </ul>
 </div>

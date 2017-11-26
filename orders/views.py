@@ -4,7 +4,6 @@ from Library.models import *
 from orders.models import *
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from orders.forms import *
-import random
 
 
 def basket_adding(request):
@@ -112,14 +111,11 @@ def ordering(request, book_id):
     products = OrderInBasket.objects.filter(session_key=session_key)
     products_in_order = ProductInOrder.objects.filter(session_key_product_in_order=session_key)
 
-
-
-
     """FORMS FOR ORDERING"""
 
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = OrderForm(request.POST)
+        form = OrderForm(request.POST, request.FILES)
         form_p = ProductsForm(request.POST)
 
         # check whether it's valid:
@@ -130,9 +126,10 @@ def ordering(request, book_id):
             appendage = form.cleaned_data['appendage']
             mobile_number = form.cleaned_data['mobile_number']
             address = form.cleaned_data['address']
+            image = form.cleaned_data['image']
 
             order = Order(address=address, email=email, mobile_number=mobile_number, appendage=appendage,
-                          name=name, surname=surname, session_key_in_order=session_key)
+                          name=name, surname=surname, session_key_in_order=session_key, image=image)
             order.save()
             prod_in_order = ProductInOrder.objects.filter(session_key_product_in_order=session_key)
             order = Order.objects.get(session_key_in_order=session_key)
@@ -147,11 +144,10 @@ def ordering(request, book_id):
                 item.save()
                 order.save()
 
-            # prod_in_order.order = order
-            # total_price_prod = prod_in_order.total_price
-            # total_price_order = order.total_price
-            # total_price_order = total_price_order + total_price_prod
-            # order.total_price = total_price_order
+            products_in_basket = OrderInBasket.objects.filter(session_key=session_key)
+            products_in_basket.delete()
+            products_in_basket.update()
+
 
             return redirect('/done_ordering/')
 
@@ -159,18 +155,18 @@ def ordering(request, book_id):
     else:
         form = OrderForm()
 
-    if products_in_order:
-        for prod in products:
-            for prorder in products_in_order:
-                if int(prod.book_id) == prorder.product.id:
-                    return redirect('/check_on_exist/')
+    # if products_in_order:
+    #     for prod in products:
+    #         for prorder in products_in_order:
+    #             if int(prod.book_id) == prorder.product.id:
+    #                 return redirect('/check_on_exist/')
+
 
     return render(request, 'orders/ordering.html', locals())
 
 
 def done_ordering(request):
     return render(request, 'orders/done_ordering.html', locals())
-
 
 def check_on_exist(request):
     return render(request, 'orders/check_on_exist.html', locals())

@@ -12,6 +12,7 @@ class Order(models.Model):
     session_key_in_order = models.CharField(max_length=1024, null=True)
     number_of_order = models.CharField(max_length=4096, null=True)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    image = models.ImageField(upload_to='media/', null=True)
 
     def __str__(self):
         return "Order %s" % self.id

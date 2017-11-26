@@ -9,6 +9,7 @@ class OrderForm(forms.Form):
     mobile_number = forms.CharField(required=True, max_length=32)
     appendage = forms.CharField(max_length=2048, required=True)
     address = forms.CharField(required=True, max_length=64)
+    image = forms.ImageField()
 
 
 class ProductsForm(forms.Form):

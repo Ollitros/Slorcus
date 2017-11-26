@@ -5,8 +5,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-2"> Some of these products you have ordered. Would you change your old order?</div>
-            <div class="col-md-2"><button>YES</button></div>
-            <div class="col-md-2"><button>NO</button></div>
+            <div class="col-md-2">
+                <form method="post" action="">{% csrf_token %}
+                    <button type="submit">YES</button>
+                </form>
+            </div>
+            <div class="col-md-2">
+                 <form method="post" action="{% url "library" %}">{% csrf_token %}
+                    <button type="submit">NO</button>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

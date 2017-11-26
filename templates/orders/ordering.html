@@ -22,7 +22,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <form id="order-form" class="form-horizontal" role="form" action="{% url 'ordering' 1 %}" method="post">{% csrf_token %}
+                <form id="order-form" class="form-horizontal" role="form" action="{% url 'ordering' 1 %}" method="post" enctype="multipart/form-data">{% csrf_token %}
                     <div class="row">
                         <div class="col-md-12 test">
                             <div class="  form-error col-md-3" id="error1">{{ form.name.errors }}</div>
@@ -56,15 +56,23 @@
                                 <input required class="form-control " id="Mobile_number" type="text" name="{{ form.mobile_number.html_name }}" />
                              </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class=" hidden form-error col-md-3"> {{ form.appendage.errors }}</div>
                             <label class="col-md-2 control-label" for="Comments">Comments</label>
-                            <textarea  class="form-control" rows="3" id="Comments" name="{{ form.appendage.html_name }}" ></textarea>
+                            <textarea  class="form-control" rows="4" id="Comments" name="{{ form.appendage.html_name }}" ></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <div class=" form-error col-md-4" id="error_address">{{ form.address.errors }}</div>
+                            <div class=" correct hidden col-md-4 glyphicon glyphicon-ok" id="correct_address"></div>
+                             <div class=" hidden form-error col-md-4">{{ form.address.errors }}</div>
+                             <label class="col-md-2 control-label" for="Address">Address</label>
+                             <textarea  required class="form-control" rows="4" id="Address"  name="{{ form.address.html_name }}" placeholder="Address"></textarea>
                         </div>
                         <div class="col-md-12">
-                             <div class=" hidden form-error col-md-3">{{ form.address.errors }}</div>
-                             <label class="col-md-2 control-label" for="Address">Address</label>
-                             <textarea  class="form-control" rows="3" id="Address"  name="{{ form.address.html_name }}" placeholder="Address"></textarea>
+                            <label class="col-md-2" for="Image">Image</label>
+                            <div class="col-md-6">
+                                <input required class="form-control" id="Image" type="file" name="{{ form.image.html_name }}" />
+                            </div>
                         </div>
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-success bye-order-button">BYE</button>

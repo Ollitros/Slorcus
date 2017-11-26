@@ -19,7 +19,7 @@ $(document).ready(function() {
                 console.log(data["book_id"] + data["session_key"]);
                 $('#basket').html("");
                 $.each(data.products, function (k, v) {
-                    $('#basket').append("<p>" + v.book_id + v.name + "</p>");
+                    $('#basket-li').append(" " + v.name);
                 });
             }
         });
@@ -163,5 +163,24 @@ $(document).ready(function() {
             }
 
         });
+    $('#Address').on('change', function (e) {
+            e.preventDefault();
+            var input = $('#Address');
+            console.log("Ok");
+            console.log(input.val());
+            if (input.val())
+            {
+                $('#error_address').addClass('hidden');
+                $('#correct_address').removeClass('hidden');
+            }
+            else
+            {
+                $('#error_address').removeClass('hidden');
+                $('#correct_address').addClass('hidden');
+            }
+
+        });
+
+
 
 });
